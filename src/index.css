@@ -12,12 +12,65 @@ body {
 
 .controls {
     margin-bottom: 16px;
-    min-height: 32px;
+}
+
+.controls button {
+    margin-right: 8px;
 }
 
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
-    min-height: 200px;
+}
+
+.grid-cell {
+    background: #fff;
+    border: 1px solid #ddd;
+    min-height: 150px;
+    border-radius: 6px;
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.grid-cell.empty {
+    background: #fafafa;
+    color: #aaa;
+    align-items: center;
+    justify-content: center;
+}
+
+.widget-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 8px;
+}
+
+.delete-button {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 50%;
+    background: #f44336;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.grid-cell:hover .delete-button {
+    opacity: 1;
+}
+
+.chart-placeholder {
+    height: 80px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-top: 8px;
 }
