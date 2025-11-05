@@ -13,12 +13,12 @@ type WidgetProps = {
 const Widget: React.FC<WidgetProps> = ({ index, widget }) => {
     const { deleteWidget } = useDashboard();
 
-    // every grid cell is a drop target
+    // make every grid cell a drop target
     const { setNodeRef: setDroppableRef, isOver } = useDroppable({
         id: index.toString(),
     });
 
-    // only non-empty cells are draggable
+    // make the widget draggable
     const {
         setNodeRef: setDraggableRef,
         listeners,
@@ -47,13 +47,12 @@ const Widget: React.FC<WidgetProps> = ({ index, widget }) => {
             }`}
         >
             {widget ? (
-                <div
-                    ref={setDraggableRef}
-                    className="widget-content"
-                    style={style}
-                    {...listeners}
-                    {...attributes}
-                >
+                <div ref={setDraggableRef} className="widget-content" style={style}>
+                    {/* drag handle */}
+                    <div className="drag-handle" {...listeners} {...attributes}>
+                        ⋮
+                    </div>
+
                     <button
                         type="button"
                         className="delete-button"
