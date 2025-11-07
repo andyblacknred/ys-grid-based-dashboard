@@ -63,9 +63,9 @@ const Widget: React.FC<WidgetProps> = ({ index, widget }) => {
             ×
           </button>
 
-          {widget.type === 'line' && <LineChartWidget data={widget.data} />}
-          {widget.type === 'bar' && <BarChartWidget data={widget.data} />}
-          {widget.type === 'text' && <TextWidget data={widget.data} />}
+          {widget.type === 'line' && <LineChartWidget data={widget.data} title={widget.title} text={widget.text} />}
+          {widget.type === 'bar' && <BarChartWidget data={widget.data} title={widget.title} text={widget.text} />}
+          {widget.type === 'text' && <TextWidget title={widget.title} text={widget.text} />}
         </div>
       ) : (
         <span className="empty-label">Empty</span>

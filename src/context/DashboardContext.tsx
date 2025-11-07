@@ -1,5 +1,5 @@
 import { createContext, type ReactNode, useContext, useState } from 'react';
-import {getRandomId, getWidgetData} from '../helpers';
+import { getWidgetData } from '../helpers';
 import type { DashboardContextValue, Widget, WidgetType } from '../types/dashboard.ts';
 import { INITIAL_CELLS, normalizeCells, ROW_SIZE } from '../helpers/dashboard.ts';
 
@@ -18,24 +18,7 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
         emptyIndex = next.findIndex((cell) => cell === null);
       }
 
-      let widget: Widget;
-      if (type === 'text') {
-        const data = getWidgetData('text');
-        widget = {
-          id: getRandomId(),
-          type: 'text',
-          data,
-        };
-      } else {
-        const data = getWidgetData(type);
-        widget = {
-          id: getRandomId(),
-          type,
-          data,
-        };
-      }
-
-      next[emptyIndex] = widget;
+      next[emptyIndex] = getWidgetData(type);
 
       return normalizeCells(next);
     });

@@ -1,16 +1,16 @@
 import React from 'react';
-import type { TextWidgetData } from '../../types/dashboard';
 
 type TextWidgetProps = {
-  data: TextWidgetData;
+  title?: string;
+  text?: string;
 };
 
-const TextWidget: React.FC<TextWidgetProps> = ({ data }) => {
+const TextWidget: React.FC<TextWidgetProps> = ({ title = 'Text block', text }) => {
   return (
     <div className="widget">
-      <p className="widget-title">{data.title}</p>
+      <p className="widget-title">{title}</p>
       <div className="widget-body">
-        <p>{data.text}</p>
+        <p>{text ?? 'Some text block…'}</p>
       </div>
     </div>
   );
