@@ -1,73 +1,37 @@
-# React + TypeScript + Vite
+# Grid-based Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React + TypeScript app that renders a 3-column grid where you can add, move (drag & drop), and delete fixed-size widgets.
 
-Currently, two official plugins are available:
+Demo: https://andyblacknred.github.io/ys-grid-based-dashboard/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- ✅ Fixed 3-column grid, unlimited vertical height
+- ✅ Each cell can hold exactly **one** widget
+- ✅ All widgets are 1x1
+- ✅ Controls to add:
+    - “Add Line Chart”
+    - “Add Bar Chart”
+    - “Add Text Block”
+- ✅ New widgets are placed in the **first available** empty cell (left → right, top → bottom)
+- ✅ Widgets can be **deleted** (delete button appears on hover)
+- ✅ Widgets can be **dragged** to empty cells
+- ✅ Dropping into an occupied cell is not allowed (visual feedback)
+- ✅ There is always **one empty row at the bottom** so you can keep adding widgets
+- ✅ Chart widgets show mock data (line + bar)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **React + TypeScript**
+- **React Context + `useState`** for state management (no Redux, no external state libs)
+- **@dnd-kit/core** for drag & drop
+- **Recharts** for charts
+- **Vite** for build/dev
+- **Pure CSS** (no Tailwind, no CSS-in-JS)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Project Structure (todo)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+```text
+src/
+  main.tsx
+  App.tsx
