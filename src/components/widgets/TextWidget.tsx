@@ -10,7 +10,7 @@ const TextWidget: React.FC<TextWidgetProps> = ({ title = 'Text block', text }) =
     <div className="widget">
       <p className="widget-title">{title}</p>
       <div className="widget-body">
-        <p>{text ?? 'Some text block…'}</p>
+        <p className="widget-text">{text ?? 'Some text block…'}</p>
       </div>
     </div>
   );

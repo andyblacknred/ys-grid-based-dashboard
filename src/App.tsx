@@ -4,8 +4,10 @@ import Grid from './components/Grid';
 function App () {
   return (
     <div className="app">
-      <h1>Grid-Based Dashboard</h1>
-      <Controls />
+      <div className="header">
+        <h1>Grid-Based Dashboard</h1>
+        <Controls />
+      </div>
       <Grid />
     </div>
   );
