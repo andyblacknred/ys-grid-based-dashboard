@@ -41,11 +41,11 @@
   color: #888;
 }
 
-.grid-cell.drop-target {
+.grid-cell.drop-target:not(.drag-source) {
     outline: 2px dashed #3f51b5;
 }
 
-.grid-cell.drop-target.has-widget  {
+.grid-cell.drop-target.has-widget:not(.drag-source)  {
     outline: 2px solid #b53f3f;
 }
 

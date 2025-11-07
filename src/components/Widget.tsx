@@ -43,9 +43,10 @@ const Widget: React.FC<WidgetProps> = ({ index, widget }) => {
         <div
             ref={setDroppableRef}
             data-cell-index={index}
-            className={`grid-cell ${widget ? 'has-widget' : 'empty'} ${
+            className={
+            `grid-cell ${widget ? 'has-widget' : 'empty'} ${
                 isOver ? 'drop-target' : ''
-            }`}
+            } ${isDragging ? 'drag-source' : ''}`}
         >
             {widget ? (
                 <div
