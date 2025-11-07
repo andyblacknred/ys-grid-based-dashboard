@@ -1,5 +1,5 @@
 import { createContext, type ReactNode, useContext, useState } from 'react';
-import { getRandomId } from '../helpers';
+import {getRandomId, getWidgetData} from '../helpers';
 import type { DashboardContextValue, Widget, WidgetType } from '../types/dashboard.ts';
 import { INITIAL_CELLS, normalizeCells, ROW_SIZE } from '../helpers/dashboard.ts';
 
@@ -13,20 +13,34 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
       const next = [...prev];
       let emptyIndex = next.findIndex((cell) => cell === null);
 
-      // if for some reason there is no empty cell, create a new row
       if (emptyIndex === -1) {
         next.push(...Array(ROW_SIZE).fill(null));
         emptyIndex = next.findIndex((cell) => cell === null);
       }
 
-      next[emptyIndex] = {
-        id: getRandomId(),
-        type,
-      };
+      let widget: Widget;
+      if (type === 'text') {
+        const data = getWidgetData('text');
+        widget = {
+          id: getRandomId(),
+          type: 'text',
+          data,
+        };
+      } else {
+        const data = getWidgetData(type);
+        widget = {
+          id: getRandomId(),
+          type,
+          data,
+        };
+      }
+
+      next[emptyIndex] = widget;
 
       return normalizeCells(next);
     });
   };
+
 
   const deleteWidget = (id: string) => {
     setCells((prev) => {
