@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDroppable, useDraggable } from '@dnd-kit/core';
-import { type Widget as WidgetType, useDashboard } from '../context/DashboardContext';
+import { useDashboard } from '../context/DashboardContext';
 import LineChartWidget from './widgets/LineChartWidget';
 import BarChartWidget from './widgets/BarChartWidget';
 import TextWidget from './widgets/TextWidget';
+import type {Widget as WidgetType} from "../types/dashboard.ts";
 
 type WidgetProps = {
     index: number;

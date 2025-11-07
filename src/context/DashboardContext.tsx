@@ -1,66 +1,7 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import {createContext, type ReactNode, useContext, useState} from 'react';
 import {getRandomId} from "../helpers";
-
-type WidgetType = 'line' | 'bar' | 'text';
-
-export type Widget = {
-    id: string;
-    type: WidgetType;
-};
-
-type DashboardContextValue = {
-    cells: Array<Widget | null>;
-    addWidget: (type: WidgetType) => void;
-    deleteWidget: (id: string) => void;
-    moveWidget: (fromIndex: number, toIndex: number) => void;
-};
-
-const ROW_SIZE = 3;
-const INITIAL_ROWS = 1;
-const INITIAL_CELLS = INITIAL_ROWS * ROW_SIZE;
-
-const getEmptyRowsNumber = (cells: Array<Widget | null>): number => {
-    let emptyRows = 0;
-    let i = cells.length;
-
-    // walk from the end in chunks of ROW_SIZE
-    while (i >= ROW_SIZE) {
-        const rowStart = i - ROW_SIZE;
-        const row = cells.slice(rowStart, i);
-        const isEmpty = row.every((cell) => cell === null);
-        if (!isEmpty) {
-            break;
-        }
-        emptyRows += 1;
-        i -= ROW_SIZE;
-    }
-
-    return emptyRows;
-};
-
-const normalizeCells = (list: Array<Widget | null>): Array<Widget | null> => {
-    let next = [...list];
-
-    const actualEmptyRows = getEmptyRowsNumber(next);
-    const expectedEmptyRows = 1;
-
-    // cut extra empty rows, but keep at least INITIAL_CELLS worth of cells
-    if (actualEmptyRows > expectedEmptyRows) {
-        const rowsToRemove = actualEmptyRows - expectedEmptyRows;
-        const cellsToRemove = rowsToRemove * ROW_SIZE;
-        // don't remove below INITIAL_CELLS
-        const targetLength = Math.max(INITIAL_CELLS, next.length - cellsToRemove);
-        next = next.slice(0, targetLength);
-    }
-
-    // if we have less than expectedEmptyRows, add them
-    if (actualEmptyRows < expectedEmptyRows) {
-        const rowsToAdd = expectedEmptyRows - actualEmptyRows;
-        next = [...next, ...Array(rowsToAdd * ROW_SIZE).fill(null)];
-    }
-
-    return next;
-};
+import type {DashboardContextValue, Widget, WidgetType} from "../types/dashboard.ts";
+import {INITIAL_CELLS, normalizeCells, ROW_SIZE} from "../helpers/dashboard.ts";
 
 const DashboardContext = createContext<DashboardContextValue | null>(null);
 
