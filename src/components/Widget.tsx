@@ -4,22 +4,20 @@ import { useDashboard } from '../context/DashboardContext';
 import LineChartWidget from './widgets/LineChartWidget';
 import BarChartWidget from './widgets/BarChartWidget';
 import TextWidget from './widgets/TextWidget';
-import type { Widget as WidgetType } from '../types/dashboard.ts';
+import type { Widget as WidgetModel } from '../types/dashboard';
 
 type WidgetProps = {
   index: number;
-  widget: WidgetType | null;
+  widget: WidgetModel | null;
 };
 
 const Widget: React.FC<WidgetProps> = ({ index, widget }) => {
   const { deleteWidget } = useDashboard();
 
-  // make every grid cell a drop target
   const { setNodeRef: setDroppableRef, isOver } = useDroppable({
     id: index.toString(),
   });
 
-  // make the widget draggable
   const {
     setNodeRef: setDraggableRef,
     listeners,
@@ -43,10 +41,9 @@ const Widget: React.FC<WidgetProps> = ({ index, widget }) => {
     <div
       ref={setDroppableRef}
       data-cell-index={index}
-      className={
-        `grid-cell ${widget ? 'has-widget' : 'empty'} ${
-          isOver ? 'drop-target' : ''
-        } ${isDragging ? 'drag-source' : ''}`}
+      className={`grid-cell ${widget ? 'has-widget' : 'empty'} ${
+        isOver ? 'drop-target' : ''
+      } ${isDragging ? 'drag-source' : ''}`}
     >
       {widget ? (
         <div
@@ -66,9 +63,9 @@ const Widget: React.FC<WidgetProps> = ({ index, widget }) => {
             ×
           </button>
 
-          {widget.type === 'line' && <LineChartWidget />}
-          {widget.type === 'bar' && <BarChartWidget />}
-          {widget.type === 'text' && <TextWidget />}
+          {widget.type === 'line' && <LineChartWidget data={widget.data} />}
+          {widget.type === 'bar' && <BarChartWidget data={widget.data} />}
+          {widget.type === 'text' && <TextWidget data={widget.data} />}
         </div>
       ) : (
         <span className="empty-label">Empty</span>
