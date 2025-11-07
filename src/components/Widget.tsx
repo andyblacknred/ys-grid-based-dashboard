@@ -47,8 +47,11 @@ const Widget: React.FC<WidgetProps> = ({ index, widget }) => {
             }`}
         >
             {widget ? (
-                <div ref={setDraggableRef} className="widget-content" style={style}>
-                    {/* drag handle */}
+                <div
+                    ref={setDraggableRef}
+                    className={`widget-content ${isDragging ? 'widget-content--dragging' : ''}`}
+                    style={style}
+                >
                     <div className="drag-handle" {...listeners} {...attributes}>
                         ⋮
                     </div>

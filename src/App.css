@@ -43,11 +43,22 @@
 
 .grid-cell.drop-target {
     outline: 2px dashed #3f51b5;
-    outline-offset: -4px;
 }
 
 .grid-cell .widget-content {
     height: 100%;
+}
+
+.widget-content {
+    background-color: #fff;
+    box-sizing: border-box;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.widget-content--dragging {
+    z-index: 1;
 }
 
 .drag-handle {
