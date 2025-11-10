@@ -96,12 +96,6 @@ export interface DashboardContextValue {
  * Exact mapping: widget type -> data shape
  */
 export type WidgetDataMap = {
-  text: undefined;
   bar: BarChartData;
   line: LineChartData;
 };
-
-/**
- * Helper: given a widget type, get its data shape
- */
-export type WidgetDataFor<T extends WidgetType> = WidgetDataMap[T];

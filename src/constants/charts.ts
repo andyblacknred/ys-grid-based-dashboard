@@ -18,7 +18,6 @@ export const GRID_STROKE = '#eee';
 export const GRID_DASH = '3 3';
 export const FALLBACK_COLORS = ['#3f51b5', '#ff9800', '#4caf50', '#e91e63', '#9c27b0'];
 export const WIDGET_TEMPLATES: WidgetDataMap = {
-  text: undefined,
   bar: {
     points: [
       { name: 'Neutral', value: 53000, color: '#3f51b5' },
