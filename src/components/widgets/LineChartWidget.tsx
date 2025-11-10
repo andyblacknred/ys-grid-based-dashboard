@@ -25,7 +25,7 @@ type Props = {
   data: LineChartData;
 };
 
-const LineChartWidget: React.FC<Props> = ({ title = 'Line chart', text, data }) => {
+const LineChartWidget: React.FC<Props> = React.memo(({ title = 'Line chart', text, data }) => {
   const baseSeries = data.series[0];
 
   const mergedData = (baseSeries?.points ?? []).map((basePoint) => {
@@ -70,6 +70,6 @@ const LineChartWidget: React.FC<Props> = ({ title = 'Line chart', text, data }) 
       </div>
     </div>
   );
-};
+});
 
 export default LineChartWidget;

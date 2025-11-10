@@ -26,7 +26,7 @@ type Props = {
 
 const BAR_RADIUS: [number, number, number, number] = [4, 4, 0, 0];
 
-const BarChartWidget: React.FC<Props> = ({
+const BarChartWidget: React.FC<Props> = React.memo(({
   title = 'Bar chart',
   text,
   data,
@@ -60,6 +60,6 @@ const BarChartWidget: React.FC<Props> = ({
       </div>
     </div>
   );
-};
+});
 
 export default BarChartWidget;

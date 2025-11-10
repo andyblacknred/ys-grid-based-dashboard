@@ -5,7 +5,7 @@ type Props = {
   text: string;
 };
 
-const TextWidget: React.FC<Props> = ({ title = 'Text block', text }) => {
+const TextWidget: React.FC<Props> = React.memo(({ title = 'Text block', text }) => {
   return (
     <div className="widget">
       <p className="widget-title">{title}</p>
@@ -14,6 +14,6 @@ const TextWidget: React.FC<Props> = ({ title = 'Text block', text }) => {
       </div>
     </div>
   );
-};
+});
 
 export default TextWidget;
