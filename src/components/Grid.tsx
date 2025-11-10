@@ -24,7 +24,7 @@ const Grid: React.FC = () => {
     <DndContext onDragEnd={handleDragEnd}>
       <div className="dashboard-grid">
         {cells.map((cell, index) => (
-          <Widget key={index} index={index} widget={cell} />
+          <Widget key={cell?.id ?? index} index={index} widget={cell} />
         ))}
       </div>
     </DndContext>
