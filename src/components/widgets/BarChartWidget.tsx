@@ -10,46 +10,44 @@ import {
   Cell,
 } from 'recharts';
 import type { BarChartData } from '../../types/dashboard';
+import {
+  BASE_CHART_MARGINS,
+  DEFAULT_CHART_HEIGHT,
+  FALLBACK_COLORS,
+  GRID_DASH,
+  GRID_STROKE
+} from '../../constants/charts.ts';
 
-type BarChartWidgetProps = {
+type Props = {
   title?: string;
   text?: string;
-  data?: BarChartData;
+  data: BarChartData;
 };
 
-const FALLBACK_COLORS = ['#3f51b5', '#ff9800', '#4caf50', '#e91e63', '#9c27b0'];
+const BAR_RADIUS: [number, number, number, number] = [4, 4, 0, 0];
 
-const DEFAULT_DATA: BarChartData = {
-  points: [
-    { name: 'Neutral', value: 53000, color: '#3f51b5' },
-    { name: 'Negative', value: 10000, color: '#e91e63' },
-    { name: 'Positive', value: 7000, color: '#4caf50' },
-  ],
-};
-
-const BarChartWidget: React.FC<BarChartWidgetProps> = ({
+const BarChartWidget: React.FC<Props> = ({
   title = 'Bar chart',
   text,
   data,
 }) => {
-  const source = data && data.points?.length ? data : DEFAULT_DATA;
-  const points = source.points;
+  const { points } = data;
 
   return (
     <div className="widget">
       <p className="widget-title">{title}</p>
       {text ? <p className="widget-subtitle">{text}</p> : null}
       <div className="widget-body">
-        <ResponsiveContainer width="100%" height={225}>
+        <ResponsiveContainer width="100%" height={DEFAULT_CHART_HEIGHT}>
           <BarChart
             data={points}
-            margin={{ top: 4, right: 0, left: -20, bottom: 0 }}
+            margin={BASE_CHART_MARGINS}
           >
-            <CartesianGrid stroke="#eee" strokeDasharray="3 3" />
+            <CartesianGrid stroke={GRID_STROKE} strokeDasharray={GRID_DASH} />
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+            <Bar dataKey="value" radius={BAR_RADIUS}>
               {points.map((entry, index) => (
                 <Cell
                   key={entry.name}

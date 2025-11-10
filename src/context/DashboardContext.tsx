@@ -1,7 +1,8 @@
 import { createContext, type ReactNode, useContext, useState } from 'react';
 import { getWidgetData } from '../helpers';
 import type { DashboardContextValue, Widget, WidgetType } from '../types/dashboard.ts';
-import { INITIAL_CELLS, normalizeCells, ROW_SIZE } from '../helpers/dashboard.ts';
+import { normalizeCells } from '../helpers/dashboard.ts';
+import { INITIAL_CELLS, ROW_SIZE } from '../constants/dashboard.ts';
 
 const DashboardContext = createContext<DashboardContextValue | null>(null);
 
@@ -24,10 +25,9 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-
   const deleteWidget = (id: string) => {
     setCells((prev) => {
-      const next = prev.map((cell) => (cell && cell.id === id ? null : cell));
+      const next = prev.map((cell) => (cell?.id === id ? null : cell));
       return normalizeCells(next);
     });
   };

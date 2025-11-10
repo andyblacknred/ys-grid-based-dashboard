@@ -1,8 +1,5 @@
-import type {
-  Widget,
-  WidgetDataMap,
-  WidgetType
-} from '../types/dashboard.ts';
+import type { Widget, WidgetType } from '../types/dashboard.ts';
+import { WIDGET_TEMPLATES } from '../constants/charts.ts';
 
 export const getRandomId = (): string => {
   if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
@@ -12,43 +9,6 @@ export const getRandomId = (): string => {
   // fallback
   return `id_${Date.now()}_${Math.random().toString(16).slice(2)}`;
 };
-
-const WIDGET_TEMPLATES: WidgetDataMap = {
-  text: undefined,
-  bar: {
-    points: [
-      { name: 'Neutral', value: 53000, color: '#3f51b5' },
-      { name: 'Negative', value: 10000, color: '#e91e63' },
-      { name: 'Positive', value: 7000, color: '#4caf50' },
-    ],
-  },
-  line: {
-    series: [
-      {
-        name: 'Mentions2',
-        color: '#3f51b5',
-        points: [
-          { name: '7 Jul', value: 5000 },
-          { name: '9 Jul', value: 3500 },
-          { name: '11 Jul', value: 4200 },
-          { name: '15 Jul', value: 13000 },
-          { name: '20 Jul', value: 200 },
-        ],
-      },
-      {
-        name: 'Mentions1',
-        color: '#b53f3f',
-        points: [
-          { name: '7 Jul', value: 6000 },
-          { name: '9 Jul', value: 4500 },
-          { name: '11 Jul', value: 6200 },
-          { name: '15 Jul', value: 3000 },
-          { name: '20 Jul', value: 1200 },
-        ],
-      },
-    ],
-  },
-} as const;
 
 /**
  * Returns fully formed widget with id, title, text and data.

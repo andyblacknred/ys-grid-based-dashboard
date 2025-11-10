@@ -7,7 +7,6 @@ export type WidgetType = ChartWidgetType | TextWidgetType;
 
 /**
  * Base data point used in charts.
- * Both line and bar rely on "name" (x) and "value" (y).
  */
 export interface DataPoint {
   name: string;
@@ -59,6 +58,7 @@ export interface BaseWidget {
  */
 export interface TextWidget extends BaseWidget {
   type: 'text';
+  text: string; // the "text" is required for TextWidget
 }
 
 /**

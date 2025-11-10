@@ -1,10 +1,7 @@
 import type { Widget } from '../types/dashboard.ts';
+import { INITIAL_CELLS, ROW_SIZE } from '../constants/dashboard.ts';
 
-const INITIAL_ROWS = 1;
-export const ROW_SIZE = 3;
-export const INITIAL_CELLS = INITIAL_ROWS * ROW_SIZE;
-
-const getEmptyRowsNumber = (cells: Array<Widget | null>): number => {
+const countEmptyRowsAtEnd = (cells: Array<Widget | null>): number => {
   let emptyRows = 0;
   let i = cells.length;
 
@@ -22,10 +19,11 @@ const getEmptyRowsNumber = (cells: Array<Widget | null>): number => {
 
   return emptyRows;
 };
+
 export const normalizeCells = (list: Array<Widget | null>): Array<Widget | null> => {
   let next = [...list];
 
-  const actualEmptyRows = getEmptyRowsNumber(next);
+  const actualEmptyRows = countEmptyRowsAtEnd(next);
   const expectedEmptyRows = 1;
 
   // cut extra empty rows, but keep at least INITIAL_CELLS worth of cells

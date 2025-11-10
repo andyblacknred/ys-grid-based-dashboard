@@ -11,15 +11,21 @@ import {
 } from 'recharts';
 import type { LineChartData } from '../../types/dashboard';
 
-type LineChartWidgetProps = {
+import {
+  DEFAULT_CHART_HEIGHT,
+  FALLBACK_COLORS,
+  GRID_DASH,
+  GRID_STROKE, LINE_CHART_LEGEND_HEIGHT,
+  LINE_CHART_MARGINS
+} from '../../constants/charts.ts';
+
+type Props = {
   title?: string;
   text?: string;
   data: LineChartData;
 };
 
-const FALLBACK_COLORS = ['#3f51b5', '#ff9800', '#4caf50', '#e91e63', '#9c27b0'];
-
-const LineChartWidget: React.FC<LineChartWidgetProps> = ({ title = 'Line chart', text, data }) => {
+const LineChartWidget: React.FC<Props> = ({ title = 'Line chart', text, data }) => {
   const baseSeries = data.series[0];
 
   const mergedData = (baseSeries?.points ?? []).map((basePoint) => {
@@ -38,16 +44,16 @@ const LineChartWidget: React.FC<LineChartWidgetProps> = ({ title = 'Line chart',
       <p className="widget-title">{title}</p>
       {text ? <p className="widget-subtitle">{text}</p> : null}
       <div className="widget-body">
-        <ResponsiveContainer width="100%" height={225}>
+        <ResponsiveContainer width="100%" height={DEFAULT_CHART_HEIGHT}>
           <LineChart
             data={mergedData}
-            margin={{ top: 4, right: 0, left: -20, bottom: 28 }} // adding space for the legend
+            margin={LINE_CHART_MARGINS}
           >
-            <CartesianGrid stroke="#eee" strokeDasharray="3 3" />
+            <CartesianGrid stroke={GRID_STROKE} strokeDasharray={GRID_DASH} />
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
-            <Legend verticalAlign="bottom" height={24} />
+            <Legend verticalAlign="bottom" height={LINE_CHART_LEGEND_HEIGHT} />
             {data.series.map((serie, index) => (
               <Line
                 key={serie.name}

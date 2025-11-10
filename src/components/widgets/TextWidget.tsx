@@ -1,16 +1,16 @@
 import React from 'react';
 
-type TextWidgetProps = {
+type Props = {
   title?: string;
-  text?: string;
+  text: string;
 };
 
-const TextWidget: React.FC<TextWidgetProps> = ({ title = 'Text block', text }) => {
+const TextWidget: React.FC<Props> = ({ title = 'Text block', text }) => {
   return (
     <div className="widget">
       <p className="widget-title">{title}</p>
       <div className="widget-body">
-        <p className="widget-text">{text ?? 'Some text block…'}</p>
+        <p className="widget-text">{text}</p>
       </div>
     </div>
   );

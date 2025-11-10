@@ -6,12 +6,12 @@ import BarChartWidget from './widgets/BarChartWidget';
 import TextWidget from './widgets/TextWidget';
 import type { Widget as WidgetModel } from '../types/dashboard';
 
-type WidgetProps = {
+type Props = {
   index: number;
   widget: WidgetModel | null;
 };
 
-const Widget: React.FC<WidgetProps> = ({ index, widget }) => {
+const Widget: React.FC<Props> = ({ index, widget }) => {
   const { deleteWidget } = useDashboard();
 
   const { setNodeRef: setDroppableRef, isOver } = useDroppable({
@@ -33,6 +33,7 @@ const Widget: React.FC<WidgetProps> = ({ index, widget }) => {
   if (transform) {
     style.transform = `translate3d(${transform.x}px, ${transform.y}px, 0)`;
   }
+
   if (isDragging) {
     style.opacity = 0.6;
   }
@@ -41,9 +42,13 @@ const Widget: React.FC<WidgetProps> = ({ index, widget }) => {
     <div
       ref={setDroppableRef}
       data-cell-index={index}
-      className={`grid-cell ${widget ? 'has-widget' : 'empty'} ${
-        isOver ? 'drop-target' : ''
-      } ${isDragging ? 'drag-source' : ''}`}
+      className={
+        `grid-cell
+          ${widget ? 'has-widget' : 'empty'}
+          ${isOver ? 'drop-target' : ''}
+          ${isDragging ? 'drag-source' : ''}
+        `
+      }
     >
       {widget ? (
         <div
